@@ -6,16 +6,15 @@ const rowStyle = {
 };
 
 const boardStyle = {
-  marginTop: "20px",
-  backgroundColor: "#f7ad19",
-  width: "308px",
-  minHeight: "308px",
+  backgroundColor: "#053f5c",
+  width: "20rem",
+  minHeight: "20rem",
   alignItems: "center",
   justifyContent: "center",
   display: "flex",
   flexDirection: "column",
-  border: "3px #f7ad19 solid",
-  borderRadius: "5px",
+  border: "1px #053f5c solid",
+  borderRadius: "4px",
 };
 
 const containerStyle = {
@@ -23,37 +22,40 @@ const containerStyle = {
   alignItems: "center",
   flexDirection: "column",
   color: "#053f5c",
-  backgroundImage: "linear-gradient(130deg, #f7ad19, #053f5c)",
-  minHeight: "100vh",
+  maxHeight: "100vh",
+  maxWidth: "100vw",
+  margin: "auto",
 };
 
 const instructionsStyle = {
-  marginTop: "10px",
-  marginBottom: "10px",
-  fontWeight: "bold",
-  fontSize: "20px",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "baseline",
+  fontWeight: "normal",
+  fontSize: "1rem",
 };
 
 const buttonStyle = {
-  padding: "10px 25px",
-  margin: "30px",
-  backgroundColor: "#053f5c",
-  border: "solid 0px #053f5c",
-  borderRadius: "5px",
-  color: "#f7ad19",
-  fontSize: "20px",
-  fontWeight: "bold",
+  padding: ".5rem 2rem",
+  margin: "2rem",
+  border: "1px solid #053f5c",
+  borderRadius: "4px",
+  backgroundColor: "white",
+  color: "#053f5c",
+  fontSize: "1rem",
+  fontWeight: "normal",
   cursor: "pointer",
 };
 
 const spanStyle = {
-  backgroundColor: "#053f5c",
-  border: "solid 0px #053f5c",
-  borderRadius: "5px",
-  color: "#f7ad19",
-  fontSize: "20px",
-  padding: "5px 15px",
-  margin: "10px 15px",
+  border: "1px solid #053f5c",
+  borderRadius: "4px",
+  backgroundColor: "white",
+  color: "#053f5c",
+  fontSize: "1rem",
+  fontWeight: "normal",
+  padding: ".5rem 2rem",
+  margin: "1rem",
 };
 
 const Board = () => {
@@ -138,7 +140,7 @@ const Board = () => {
     if (checkWin()) {
       setWinner(turn === 0 ? "O Wins!" : "X Wins!");
     } else if (checkTie()) {
-      setWinner("It's a Tie!");
+      setWinner("Tie");
     }
   }, [data, turn]);
 
@@ -147,12 +149,13 @@ const Board = () => {
       <div id="statusArea" className="status" style={instructionsStyle}>
         Next player <span style={spanStyle}>{turn === 0 ? "X" : "O"}</span>
       </div>
-      <div id="winnerArea" className="winner" style={instructionsStyle}>
-        Winner
-        <span style={spanStyle}>
-          {winner !== "" ? ` Congrats ${winner}` : ` None`}
-        </span>
-      </div>
+      {winner !== "" && (
+        <div id="winnerArea" className="winner" style={instructionsStyle}>
+          <span style={spanStyle}>
+            {winner === "Tie" ? "It's a tie!" : `Congrats ${winner}`}
+          </span>
+        </div>
+      )}
 
       <div ref={boardRef} style={boardStyle}>
         <div className="board-row" style={rowStyle}>
