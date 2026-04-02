@@ -1,24 +1,14 @@
-const squareStyle = {
-  minWidth: "6rem",
-  minHeight: "6rem",
-  backgroundColor: "white",
-  margin: "4px",
-  display: "flex",
-  cursor: "pointer",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: "2rem",
-  color: "#053f5c",
-  borderRadius: "4px",
-};
-
-const Square = ({ position, draw }) => {
+const Square = ({ position, value, onClick, disabled }) => {
   return (
-    <div
-      className={`square ${position}`}
-      style={squareStyle}
-      onClick={(e) => draw(e, position)}
-    ></div>
+    <button
+      className="square"
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={`Cell ${position}`}
+    >
+      {value}
+    </button>
   );
 };
 

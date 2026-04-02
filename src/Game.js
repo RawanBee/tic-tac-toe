@@ -2,11 +2,15 @@ import Board from "./Board";
 
 const Game = () => {
   return (
-    <div className="game">
-      <div className="game-board">
+    <main className="app">
+      <header className="app-header">
+        <h1>Tic-Tac-Toe</h1>
+        <p>First to connect three wins.</p>
+      </header>
+      <div className="game-shell">
         <Board />
       </div>
-    </div>
+    </main>
   );
 };
 

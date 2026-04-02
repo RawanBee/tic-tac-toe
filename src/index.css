@@ -1,13 +1,148 @@
+:root {
+  --bg-start: #090d1f;
+  --bg-end: #1a2156;
+  --card-bg: rgba(15, 21, 50, 0.7);
+  --card-border: rgba(255, 255, 255, 0.14);
+  --text-primary: #f8f9ff;
+  --text-muted: #a8afcf;
+  --accent: #6f8cff;
+  --accent-strong: #4d6bff;
+  --cell-bg: rgba(255, 255, 255, 0.09);
+  --cell-bg-hover: rgba(255, 255, 255, 0.16);
+  --shadow-lg: 0 20px 45px rgba(3, 6, 20, 0.5);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at top, var(--bg-end), var(--bg-start) 65%);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+  gap: 1rem;
+}
+
+.app-header {
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  letter-spacing: 0.03em;
+}
+
+.app-header p {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+}
+
+.game-shell {
+  width: min(100%, 28rem);
+}
+
+.game-card {
+  width: 100%;
+  border: 1px solid var(--card-border);
+  border-radius: 1.2rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-weight: 600;
+}
+
+.status-pill {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  min-width: 2.8rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.square {
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.85rem;
+  background: var(--cell-bg);
+  color: var(--text-primary);
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.square:disabled {
+  cursor: not-allowed;
+}
+
+.square:not(:disabled):hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.38);
+  background: var(--cell-bg-hover);
+}
+
+.square:focus-visible,
+.reset-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.reset-btn {
+  border: none;
+  border-radius: 0.8rem;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.reset-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .square,
+  .reset-btn {
+    transition: none;
+  }
 }
